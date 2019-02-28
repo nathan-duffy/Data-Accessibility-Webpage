@@ -8,7 +8,6 @@ Was tasked with creating a supplementary webpage within an existing website that
 
 **What I Learned:**
 
-<br>
 •	The three core languages of web development.
 <br>
 •	The ability to use computational thinking to transition to a new coding language.
