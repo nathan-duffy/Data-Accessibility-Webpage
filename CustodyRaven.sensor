@@ -1,0 +1,166 @@
+//
+// Custody Raven at MSSS Sensor Configuration File
+//
+
+// Sensor name
+name=CustodyRaven
+
+// Site name
+siteName=CustodyRaven
+
+// Local (MSSS) sensor ID
+id=400
+
+// Command Interface for Central SWS
+commandInterface=sensorPlan
+
+// SSN number
+ssnNumber=979
+
+// Latitude (deg)
+latitude=20.708392
+
+// Longitude (deg)
+longitude=203.742134
+
+// Altitude (km)
+altitude=3.05869
+
+// Timing Bias
+timeBias=0.0125
+
+// Correction to time tag bias applied post-image-processing
+timeTagCorrection=0
+
+// Gimbal type
+gimbalType=paramount
+
+// Mount Name
+mountName=CustodyRaven
+
+// Gimbal slew rate (minimum of both axes)
+gimbalSlewRate=1.5
+
+// Settle time for each task to slew and stop
+setupTime=5
+gimbalSettle=1
+
+// Gimbal track limit (deg/sec)
+gimbalAngularRate=[*,2.3]
+
+// Sun elevation when tasking [deg,deg]
+sunElevationLimit=[*,-12.0]
+
+// Sensor elevation limit
+elevationLimit=[15,*]
+
+// Lunar exclusion angle range [deg,deg]
+moonExclusion=[20,*]
+
+// Solar exclusion angle range [deg,deg]
+sunExclusion=[30,*]
+
+// The shadow type for schedule outages/visibility computations
+shadowType=penumbra
+
+/// Galactic plane exclusion angle range [deg,deg] for galactic coordinates
+galacticExclusion=[*,*]
+
+// Sensor FPA size {pixels,pixels} physical size including gaps
+// 2x2 binning (normal operations)
+arraySize="1024 1024"
+// 1x1 binning (special operations)
+// arraySize="2048 2048"
+
+// Pixel binning (default)
+binning="2 2"
+// Pixel binning (special)
+// binning="1 1"
+
+// 1x1 binning (non-scaled cdMatrix)
+// cdMatrix={{1.58446231356364e-05, -0.000510742896471873},{0.000510741694520849,1.5934682775127575e-05}}
+// 2x2 angular pixel transformation matrix with binning (degrees)
+cdMatrix={{0.0000316892,-0.00102149},{0.00102148,0.0000318694}}
+
+// Time in seconds required to acquire a single image and astrometric measurement
+// readTime=1.8
+// Necessary parameter to help scheduler get more accurate schedule generation
+// Sum of readTime and setupTime for the first image should equal 4.0
+// setupTime=2.2
+// Read Time for the scheduler to get accurate schedule generation
+readTime=5.0
+
+// Percent energy in the center pixel (1x1 binning)
+fwhm=1.25
+// Percent energy in the center pixel (2x2 binning)
+// fwhm=2.5
+
+// Magnitude of one Pe on detector array
+zeropoint=22.682
+zeropoint(Johnson_V)=20.928
+zeropoint(Johnson_R)=21.250
+zeropoint(Johnson_I)=21.104
+zeropoint(Clear)=22.682
+zeropoint(Sloan_u)=17.00
+zeropoint(Sloan_g)=21.147
+zeropoint(Sloan_r)=21.524
+zeropoint(Sloan_i)=21.221
+zeropoint(Open)=22.682
+
+// Adding the filter positions based on the new updates
+filter(Johnson_V)="2 1"
+filter(Johnson_R)="5 1"
+filter(Johnson_I)="8 1"
+filter(Open)="1 1"
+filter(Sloan_u)="3 1"
+filter(Sloan_g)="4 1"
+filter(Sloan_r)="6 1"
+filter(Sloan_i)="7 1"
+filter(Clear)="9 1"
+
+//Extinction dependent on site location and time (mag/airmass)
+extinction=0.09
+
+// Sky background in Mv/arcsec^2
+skyBackground=20.4
+
+// Pixel size in meters (13.5 microns in 2x2 binning)
+pixelSize="27e-6 27e-6"
+// Pixel size in meters (13.5 microns in 1x1 binning)
+// pixelSize="13.5e-6 13.5e-6"
+
+// Thickness of each detector pixel in meters
+thickness=40e-6
+
+// (Pe/s)
+darkCurrent=0.1
+
+// Sensor 1-sigma read noise in photoelectrons (e-)
+readNoise=20
+
+// Camera pixel well depth in photoelectrons (e-)
+wellDepth=200000
+
+//Number of bits in camera for A2D
+numBits=16
+
+// Diameter of telescope aperture (m)
+telescopeWidth=0.400
+
+// Nominal number of exposures
+exposures=6
+
+// List of acceptable exposure times
+exposureTimes=[0.50,0.75,1.00,1.25,1.50,1.75,2.00,2.50,2.75,3.00]
+
+// Number of exposures per collection
+metricMarks=6
+
+// CCDS amplifier gain (e-/DN)
+gain=1.1
+
+// Humidity Limit in percentage (%)
+humidityLimit=85
+
+// Hot pixels to ignore with 2x2 binning (x y, ...)
+hotPixels="142 459, 149 448, 285 515, 311 518, 332 538, 182 553, 169 543, 196 603, 296 478, 299 511, 155 259, 447 346,874 154,874 155,297 202,297 203,948 29,372 158,373 159,722 699,721 700,411 809,411 810,44 436,44 437,823 710,824 711,717 897,717 896,855 884,1016 905"
