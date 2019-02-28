@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Sensors </title>
+    <meta property="description" content="Sensor file populator">
+    <meta name="author" content="Nathan Duffy">
+    <!-- End SEO tag -->
+    <script src="assets/vendor/pace/pace.min.js"></script>
+    <!-- BEGIN BASE STYLES -->
+    <link rel="stylesheet" href="assets/vendor/pace/pace.min.css">
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/fontawesome-all.min.css">
+    <!-- END BASE STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="assets/stylesheets/main.min.css">
+    <link rel="stylesheet" href="assets/stylesheets/custom.css">
+    <!-- END THEME STYLES -->
+    <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="assets/vendor/tribute/tribute.css">
+    <link rel="stylesheet" href="assets/vendor/At.js/css/jquery.atwho.min.css">
+
+    <style>
+    body {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    label {
+      width: 400px;
+      margin-right: 33px;
+    }
+    #fileContents {
+      border: 3px solid;
+      overflow-y: scroll;
+      height: 600px;
+      background-color: #ededed;
+      padding: 10px;
+    }
+.column {
+    column-count:2;
+    background-color:#CBEEFF;
+    text: bold;
+    box-shadow: 0 0 6px rgb(125, 196, 232), 0 0 3px beige inset;
+
+}
+input {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #28313B;
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border: 1px solid #D4D5D7;
+  border-radius: 0.25rem;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  }
+
+    </style>
+
+  </head>
+  <!--Title-->
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1 style = "padding-left: 100px;
+        font-size: 60px;">Sensors</h1>
+      </br>
+        <ul class = "nav nav-tabs nav-justified">
+          <li class = "active"><a href = "index.html">Home</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--Title-->
+
+    <div  style="text-align:right">
+    <button onclick="newFile()" id="new" class="btn btn-primary" style="width:100px;height:50px;font-size:18px">New</button>
+    </div>
+
+          <!--file input -->
+        <div class="form-group">
+          <label for="files" style= "font-weight: bolder">File input:</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="txtfiletoread" style = "font-weight:bold; padding-top:50px"/><strong>Read bytes:</strong>
+            <label class="custom-file-label" for="files" style="font-style:italic">Choose sensor file</label>
+            <output id="list"></output>
+          </div>
+        </div>
+          <!--/file input -->
+    <!--Populator-->
+    <div id="fileContents">
+    </div>
+    <!--Populator-->
+
+    <h1 style="text-align: center;
+              padding-top:30px;
+              padding-bottom: 30px;
+              font-weight: bolder;" >Sensor Attributes</h1>
+
+              <div class="column" id="columns" style="padding:30px">
+              </div>
+
+          <!--Saving-->
+          <label for="files" style= "font-weight: bolder; padding-top: 30px">Filename to save as:</label>
+          <input type="text" id="inputFileNameToSaveAs" class="form-control" style = "width: 25%"></input>
+          <div style ="padding-top: 20px">
+          </div>
+          <button onclick="saveTextAsFile()" class="btn btn-primary">Save Changes</button>
+          <div style ="padding-top: 50px">
+          </div>
+          <!--Saving-->
+
+<script>
+//file attributes
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+      for (var i = 0, f; f = files[i]; i++) {
+
+        output.push('<li style="color:darkblue"><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+        f.size, ' bytes, last modified: ',
+        f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+        '</li>');
+      }
+        document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+
+        var filename = document.getElementById('inputFileNameToSaveAs');
+        filename.value = output[1];
+
+    }
+    //file attributes
+
+        document.getElementById('txtfiletoread').addEventListener('change', handleFileSelect, false);
+
+        //Updating Inputs
+        function updateInput(id, value) {
+          let resultFile = '';
+          for (var line = 0; line < lines.length; line++) {
+            if (lines[line].includes("=")) {
+              if (lines[line].split("=")[0] == id) {
+                lines[line] = id + "=" + value;
+              }
+            }
+            resultFile += lines[line] + "\n";
+          }
+          document.getElementById('fileContents').innerText = resultFile;
+        }
+        //Updating Inputs
+
+        //Work in progress:: Adding functionality to create a new sensor file
+        function newFile() {
+          var columnsList = document.getElementById("columns");
+          columnsList.style.columns = "1";
+
+          var satellite = document.createElement("LABEL");
+          satellite.appendChild(document.createTextNode("Satellite ="));
+          columnsList.appendChild(satellite);
+
+          var satelliteInput = document.createElement("INPUT");
+          satelliteInput.setAttribute("type", "text");
+          satelliteInput.style.width = "50%";
+          columnsList.appendChild(satelliteInput);
+
+          var variable = document.createElement("LABEL");
+          variable.appendChild(document.createTextNode("Variable Name ="));
+          columnsList.appendChild(variable);
+
+          var variableInput = document.createElement("INPUT");
+          variableInput.setAttribute("type", "text");
+          variableInput.style.width = "50%";
+          columnsList.appendChild(variableInput);
+
+
+          var value = document.createElement("LABEL");
+          value.appendChild(document.createTextNode("Value ="));
+          columnsList.appendChild(value);
+
+          var valueInput = document.createElement("INPUT");
+          valueInput.setAttribute("type", "text");
+          valueInput.style.width = "50%";
+          columnsList.appendChild(valueInput);
+
+          var button = document.createElement("BUTTON");
+          button.setAttribute("type", "submit");
+          button.appendChild(document.createTextNode("Add"));
+
+          columnsList.appendChild(button);
+
+        }
+    //Work in progress:: Adding functionality to create a new sensor file
+
+//Read File//
+window.onload = function () {
+  //Check the support for the File API support
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+    var fileSelected = document.getElementById('txtfiletoread');
+    fileSelected.addEventListener('change', function (e) {
+      //Set the extension for the file
+      var fileExtension = /.*/;
+      //Get the file object
+      var fileTobeRead = fileSelected.files[0];
+      //Check of the extension match
+      if (fileTobeRead.type.match(fileExtension)) {
+        //Initialize the FileReader object to read the 2file
+        var columnsList = document.getElementById("columns");
+        while (columnsList.firstChild) {
+          columnsList.removeChild(columnsList.firstChild);
+        }
+
+        var fileReader = new FileReader();
+        fileReader.onload = function (e) {
+          var filteredLines = [];
+          lines = this.result.split('\n');
+          for (var line = 0; line < lines.length; line++) {
+            if (lines[line].includes("=")) {
+              if (lines[line].startsWith("//")) { continue; }
+              filteredLines.push(lines[line]);
+
+            }
+          }
+
+        //parsing
+        for (var index = 0; index < filteredLines.length; index++) {
+          var variableName = filteredLines[index].split("=")[0];
+          var value = filteredLines[index].split("=")[1];
+
+          var headerNames = document.createElement("H5");
+          headerNames.setAttribute("id", variableName);
+          headerNames.appendChild(document.createTextNode(variableName));
+          columnsList.appendChild(headerNames);
+
+          var input = document.createElement("INPUT");
+          input.setAttribute("id", variableName);
+          input.setAttribute("type", "text");
+          input.setAttribute("value", value);
+          input.setAttribute("oninput", "updateInput(this.id, this.value)");
+          columnsList.appendChild(input);
+        }
+        //parsing
+
+        //Work in progress:: Making 'type' attributes a fixed dropdown instead of an input value
+        /*for(var i = 0; i < columnsList.children.length; i++) {
+          //console.log(columnsList.children[i]);
+        }
+        console.log(columnsList.children[0].id);
+        //if columnsList.children[0].id.include("Type")
+
+        console.log(columnsList.children[12].id);
+        console.log(columnsList.children[12].value);
+
+
+        function dropdown() {
+            var x = document.createElement("SELECT");
+            x.setAttribute("id", "mySelect");
+            columnsList.appendChild(x);
+
+            var z = document.createElement("option");
+            z.setAttribute("value", value);
+            var t = document.createTextNode(value);
+            z.appendChild(t);
+            document.getElementById("mySelect").appendChild(z);
+        }
+        */
+        //Work in progress:: Making 'type' attributes a fixed dropdown instead of an input value
+
+        document.getElementById('fileContents').innerText = fileReader.result;
+      }
+      fileReader.readAsText(fileTobeRead);
+      }
+      else {
+        alert("Please select a sensor file");
+      }
+    }, false);
+  }
+  else {
+    alert("Files are not supported");
+  }
+
+}
+
+//Saving Changes
+function saveTextAsFile(){
+
+
+    var textToSave = document.getElementById("fileContents").innerText;
+    var textToSaveAsBlob = new Blob([textToSave], {type: "text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = document.getElementById("inputFileNameToSaveAs").value;
+
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+
+    downloadLink.click();
+}
+function destroyClickedElement(event)
+{
+  document.body.removeChild(event.target);
+}
+//Saving Changes
+
+</script>
+</body
+</html>
